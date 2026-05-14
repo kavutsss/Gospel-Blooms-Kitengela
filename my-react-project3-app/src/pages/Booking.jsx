@@ -13,7 +13,6 @@ function Booking() {
     purpose: ''
   })
   const [bookings, setBookings] = useState([])
-  const [isAdmin, setIsAdmin] = useState(false)
   const [showForm, setShowForm] = useState(true)
 
   const facilities = [
@@ -98,7 +97,7 @@ function Booking() {
           Facility Booking
         </h1>
 
-        {!showForm && !isAdmin && (
+        {!showForm && (
           <div className="text-center mb-8">
             <button
               onClick={() => setShowForm(true)}
@@ -109,7 +108,7 @@ function Booking() {
           </div>
         )}
 
-        {showForm && !isAdmin && (
+        {showForm && (
           <div className="bg-white rounded-lg shadow-md p-8 mb-8">
             <h2 className="text-2xl font-bold text-purple-600 mb-6">Booking Request Form</h2>
             <form onSubmit={handleSubmit}>
@@ -244,8 +243,7 @@ function Booking() {
           </div>
         )}
 
-        {isAdmin && (
-          <div className="bg-white rounded-lg shadow-md p-8 mb-8">
+        <div className="bg-white rounded-lg shadow-md p-8 mb-8">
             <h2 className="text-2xl font-bold text-purple-600 mb-6">All Booking Requests</h2>
             {bookings.length === 0 ? (
               <p className="text-gray-600">No booking requests yet.</p>
@@ -289,9 +287,8 @@ function Booking() {
               </div>
             )}
           </div>
-        )}
 
-        {!isAdmin && bookings.length > 0 && (
+        {bookings.length > 0 && (
           <div className="bg-white rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-bold text-purple-600 mb-6">Your Booking Requests</h2>
             <div className="space-y-4">
