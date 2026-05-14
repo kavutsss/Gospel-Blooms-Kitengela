@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { signOut } from 'firebase/auth'
 import { auth, db } from '../firebase'
-import { collection, getDocs, query, where } from 'firebase/firestore'
+import { collection, getDocs } from 'firebase/firestore'
 import { Link } from 'react-router-dom'
 
 function AdminDashboard() {
@@ -13,18 +13,7 @@ function AdminDashboard() {
     approvedBookings: 0
   })
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
-      setUser(currentUser)
-      if (currentUser) {
-        fetchStats()
-      }
-    })
-
-    return () => unsubscribe()
-  }, [])
-
-  const fetchStats = async () => {
+  const fetchStats = useCallback(async () => {
     try {
       const announcementsSnap = await getDocs(collection(db, 'announcements'))
       const eventsSnap = await getDocs(collection(db, 'events'))
@@ -43,7 +32,18 @@ function AdminDashboard() {
     } catch (error) {
       console.error('Error fetching stats:', error)
     }
-  }
+  }, [])
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser)
+      if (currentUser) {
+        fetchStats()
+      }
+    })
+
+    return () => unsubscribe()
+  }, [fetchStats])
 
   const handleLogout = async () => {
     try {
