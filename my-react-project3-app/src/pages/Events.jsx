@@ -4,7 +4,6 @@ import { db } from '../firebase'
 
 function Events() {
   const [events, setEvents] = useState([])
-  const [isAdmin, setIsAdmin] = useState(false)
   const [showForm, setShowForm] = useState(false)
   const [editingId, setEditingId] = useState(null)
   const [formData, setFormData] = useState({
@@ -16,6 +15,19 @@ function Events() {
   })
 
   useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'events'))
+        const eventsData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }))
+        // Sort by date, upcoming first
+        setEvents(eventsData.sort((a, b) => new Date(a.date) - new Date(b.date)))
+      } catch (error) {
+        console.error('Error fetching events:', error)
+      }
+    }
     fetchEvents()
   }, [])
 
@@ -82,21 +94,19 @@ function Events() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-12">
           <h1 className="text-4xl font-bold text-gray-800">Events</h1>
-          {isAdmin && (
-            <button
-              onClick={() => {
-                setShowForm(!showForm)
-                setEditingId(null)
-                setFormData({ title: '', date: '', time: '', venue: '', description: '' })
-              }}
-              className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition"
-            >
-              {showForm ? 'Cancel' : 'Add Event'}
-            </button>
-          )}
+          <button
+            onClick={() => {
+              setShowForm(!showForm)
+              setEditingId(null)
+              setFormData({ title: '', date: '', time: '', venue: '', description: '' })
+            }}
+            className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition"
+          >
+            {showForm ? 'Cancel' : 'Add Event'}
+          </button>
         </div>
 
-        {showForm && isAdmin && (
+        {showForm && (
           <div className="bg-white rounded-lg shadow-md p-8 mb-8">
             <h2 className="text-2xl font-bold text-purple-600 mb-6">
               {editingId ? 'Edit Event' : 'New Event'}
@@ -211,22 +221,20 @@ function Events() {
                         <p>📍 {event.venue}</p>
                       </div>
                     </div>
-                    {isAdmin && (
-                      <div className="space-x-2 ml-4">
-                        <button
-                          onClick={() => handleEdit(event)}
-                          className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 transition text-sm"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => handleDelete(event.id)}
-                          className="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 transition text-sm"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    )}
+                    <div className="space-x-2 ml-4">
+                      <button
+                        onClick={() => handleEdit(event)}
+                        className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 transition text-sm"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(event.id)}
+                        className="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 transition text-sm"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                   <p className="text-gray-700 whitespace-pre-line">{event.description}</p>
                 </div>
@@ -249,22 +257,20 @@ function Events() {
                         <p>📍 {event.venue}</p>
                       </div>
                     </div>
-                    {isAdmin && (
-                      <div className="space-x-2 ml-4">
-                        <button
-                          onClick={() => handleEdit(event)}
-                          className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 transition text-sm"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => handleDelete(event.id)}
-                          className="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 transition text-sm"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    )}
+                    <div className="space-x-2 ml-4">
+                      <button
+                        onClick={() => handleEdit(event)}
+                        className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 transition text-sm"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(event.id)}
+                        className="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 transition text-sm"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                   <p className="text-gray-700 whitespace-pre-line">{event.description}</p>
                 </div>
