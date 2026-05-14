@@ -4,7 +4,6 @@ import { db } from '../firebase'
 
 function Announcements() {
   const [announcements, setAnnouncements] = useState([])
-  const [isAdmin, setIsAdmin] = useState(false)
   const [showForm, setShowForm] = useState(false)
   const [editingId, setEditingId] = useState(null)
   const [formData, setFormData] = useState({
@@ -14,6 +13,19 @@ function Announcements() {
   })
 
   useEffect(() => {
+    const fetchAnnouncements = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'announcements'))
+        const announcementsData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }))
+        // Sort by date, newest first
+        setAnnouncements(announcementsData.sort((a, b) => new Date(b.date) - new Date(a.date)))
+      } catch (error) {
+        console.error('Error fetching announcements:', error)
+      }
+    }
     fetchAnnouncements()
   }, [])
 
@@ -74,21 +86,19 @@ function Announcements() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-12">
           <h1 className="text-4xl font-bold text-gray-800">Announcements</h1>
-          {isAdmin && (
-            <button
-              onClick={() => {
-                setShowForm(!showForm)
-                setEditingId(null)
-                setFormData({ title: '', content: '', date: new Date().toISOString().split('T')[0] })
-              }}
-              className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition"
-            >
-              {showForm ? 'Cancel' : 'Add Announcement'}
-            </button>
-          )}
+          <button
+            onClick={() => {
+              setShowForm(!showForm)
+              setEditingId(null)
+              setFormData({ title: '', content: '', date: new Date().toISOString().split('T')[0] })
+            }}
+            className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition"
+          >
+            {showForm ? 'Cancel' : 'Add Announcement'}
+          </button>
         </div>
 
-        {showForm && isAdmin && (
+        {showForm && (
           <div className="bg-white rounded-lg shadow-md p-8 mb-8">
             <h2 className="text-2xl font-bold text-purple-600 mb-6">
               {editingId ? 'Edit Announcement' : 'New Announcement'}
@@ -165,22 +175,20 @@ function Announcements() {
                       })}
                     </p>
                   </div>
-                  {isAdmin && (
-                    <div className="space-x-2">
-                      <button
-                        onClick={() => handleEdit(announcement)}
-                        className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 transition text-sm"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => handleDelete(announcement.id)}
-                        className="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 transition text-sm"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  )}
+                  <div className="space-x-2">
+                    <button
+                      onClick={() => handleEdit(announcement)}
+                      className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 transition text-sm"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(announcement.id)}
+                      className="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 transition text-sm"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
                 <p className="text-gray-700 whitespace-pre-line">{announcement.content}</p>
               </div>
