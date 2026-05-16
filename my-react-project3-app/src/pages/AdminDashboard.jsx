@@ -68,13 +68,13 @@ function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white py-12">
+    <div className="min-h-screen bg-gradient-to-br from-beige-50 to-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-800">Admin Dashboard</h1>
+          <h1 className="text-5xl font-bold text-black">Admin Dashboard</h1>
           <button
             onClick={handleLogout}
-            className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition"
+            className="bg-black text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-all"
           >
             Logout
           </button>
@@ -82,96 +82,62 @@ function AdminDashboard() {
 
         {/* Stats Cards */}
         <div className="grid md:grid-cols-4 gap-6 mb-12">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="text-3xl font-bold text-purple-600 mb-2">{stats.announcements}</div>
+          <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+            <div className="text-3xl font-bold text-black mb-2">{stats.announcements}</div>
             <div className="text-gray-600">Total Announcements</div>
-            <Link to="/announcements" className="text-purple-600 hover:text-purple-700 mt-2 inline-block">
-              Manage →
-            </Link>
           </div>
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="text-3xl font-bold text-purple-600 mb-2">{stats.events}</div>
+          <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+            <div className="text-3xl font-bold text-black mb-2">{stats.events}</div>
             <div className="text-gray-600">Total Events</div>
-            <Link to="/events" className="text-purple-600 hover:text-purple-700 mt-2 inline-block">
-              Manage →
-            </Link>
           </div>
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="text-3xl font-bold text-yellow-600 mb-2">{stats.pendingBookings}</div>
+          <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+            <div className="text-3xl font-bold text-black mb-2">{stats.pendingBookings}</div>
             <div className="text-gray-600">Pending Bookings</div>
-            <Link to="/booking" className="text-purple-600 hover:text-purple-700 mt-2 inline-block">
-              Review →
-            </Link>
-          </div>
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="text-3xl font-bold text-green-600 mb-2">{stats.approvedBookings}</div>
-            <div className="text-gray-600">Approved Bookings</div>
-            <Link to="/booking" className="text-purple-600 hover:text-purple-700 mt-2 inline-block">
+            <Link to="/booking" className="text-black hover:text-gray-800 mt-2 inline-block">
               View →
             </Link>
           </div>
         </div>
 
         {/* Quick Actions */}
-        <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-          <h2 className="text-2xl font-bold text-purple-600 mb-6">Quick Actions</h2>
-          <div className="grid md:grid-cols-2 gap-4">
+        <div className="bg-white rounded-xl shadow-lg p-10 mb-10 border border-gray-200">
+          <h2 className="text-3xl font-bold text-black mb-6">Quick Actions</h2>
+          <div className="grid md:grid-cols-2 gap-6">
             <Link
               to="/announcements"
-              className="bg-purple-100 p-6 rounded-lg hover:bg-purple-200 transition"
+              className="bg-beige-100 text-black p-8 rounded-xl hover:bg-beige-200 transition-all text-center border border-gray-200"
             >
-              <h3 className="text-xl font-semibold text-purple-600 mb-2">📢 Add Announcement</h3>
-              <p className="text-gray-600">Create a new announcement for the church</p>
+              <div className="text-4xl mb-2">📢</div>
+              <div className="font-semibold">Manage Announcements</div>
             </Link>
             <Link
               to="/events"
-              className="bg-purple-100 p-6 rounded-lg hover:bg-purple-200 transition"
+              className="bg-beige-100 text-black p-8 rounded-xl hover:bg-beige-200 transition-all text-center border border-gray-200"
             >
-              <h3 className="text-xl font-semibold text-purple-600 mb-2">📅 Create Event</h3>
-              <p className="text-gray-600">Add a new event to the calendar</p>
+              <div className="text-4xl mb-2">📅</div>
+              <div className="font-semibold">Manage Events</div>
             </Link>
             <Link
               to="/booking"
-              className="bg-purple-100 p-6 rounded-lg hover:bg-purple-200 transition"
+              className="bg-beige-100 text-black p-8 rounded-xl hover:bg-beige-200 transition-all text-center border border-gray-200"
             >
-              <h3 className="text-xl font-semibold text-purple-600 mb-2">🏢 Review Bookings</h3>
-              <p className="text-gray-600">Approve or reject facility booking requests</p>
+              <div className="text-4xl mb-2">🏢</div>
+              <div className="font-semibold">Manage Bookings</div>
             </Link>
             <Link
-              to="/"
-              className="bg-purple-100 p-6 rounded-lg hover:bg-purple-200 transition"
+              to="/contact"
+              className="bg-beige-100 text-black p-8 rounded-xl hover:bg-beige-200 transition-all text-center border border-gray-200"
             >
-              <h3 className="text-xl font-semibold text-purple-600 mb-2">🏠 View Website</h3>
-              <p className="text-gray-600">See the public-facing website</p>
+              <div className="text-4xl mb-2">📞</div>
+              <div className="font-semibold">View Messages</div>
             </Link>
           </div>
         </div>
 
         {/* Recent Activity */}
-        <div className="bg-white rounded-lg shadow-md p-8">
-          <h2 className="text-2xl font-bold text-purple-600 mb-6">Admin Information</h2>
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                {user.email?.[0].toUpperCase()}
-              </div>
-              <div>
-                <p className="font-semibold">{user.email}</p>
-                <p className="text-gray-600 text-sm">Administrator</p>
-              </div>
-            </div>
-            <div className="border-t pt-4">
-              <p className="text-gray-600">
-                <strong>Project:</strong> Gospel Blooms Kitengela Church Facility WebApp
-              </p>
-              <p className="text-gray-600">
-                <strong>Version:</strong> 1.0.0
-              </p>
-              <p className="text-gray-600">
-                <strong>Deployment:</strong> Firebase Hosting
-              </p>
-            </div>
-          </div>
+        <div className="bg-white rounded-xl shadow-lg p-10 border border-gray-200">
+          <h2 className="text-3xl font-bold text-black mb-6">Recent Activity</h2>
+          <p className="text-gray-600">Recent activity will be displayed here.</p>
         </div>
       </div>
     </div>
