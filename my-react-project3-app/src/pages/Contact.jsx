@@ -31,16 +31,16 @@ function Contact() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white py-12">
+    <div className="min-h-screen bg-gradient-to-br from-cream-50 to-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold text-center mb-12 text-gray-800">
+        <h1 className="text-5xl font-bold text-center mb-16 text-gold-500">
           Contact Us
         </h1>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-10">
           {/* Contact Form */}
-          <div className="bg-white rounded-lg shadow-md p-8">
-            <h2 className="text-2xl font-bold text-purple-600 mb-6">Send us a Message</h2>
+          <div className="bg-gradient-to-br from-cream-200 to-cream-100 rounded-xl shadow-lg p-10 border border-cream-500">
+            <h2 className="text-3xl font-bold text-charcoal mb-6">Send us a Message</h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label className="block text-gray-700 font-semibold mb-2" htmlFor="name">
@@ -53,7 +53,7 @@ function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                   placeholder="Your full name"
                 />
               </div>
@@ -68,7 +68,7 @@ function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -82,8 +82,8 @@ function Contact() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
-                  placeholder="+254 XXX XXX XXX"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                  placeholder="+254 712 345 678"
                 />
               </div>
               <div className="mb-4">
@@ -97,7 +97,7 @@ function Contact() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                   placeholder="What is this about?"
                 />
               </div>
@@ -112,13 +112,13 @@ function Contact() {
                   onChange={handleChange}
                   required
                   rows="5"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                   placeholder="Your message..."
                 ></textarea>
               </div>
               <button
                 type="submit"
-                className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition"
+                className="w-full bg-gold-500 text-white py-3 rounded-lg font-semibold hover:bg-gold-600 transition-all"
               >
                 Send Message
               </button>
@@ -126,54 +126,54 @@ function Contact() {
           </div>
 
           {/* Contact Information */}
-          <div className="space-y-6">
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <h2 className="text-2xl font-bold text-purple-600 mb-6">Contact Information</h2>
-              <div className="space-y-4">
+          <div className="space-y-8">
+            <div className="bg-white rounded-xl shadow-lg p-10 border border-cream-500">
+              <h2 className="text-3xl font-bold text-charcoal mb-6">Contact Information</h2>
+              <div className="space-y-6">
                 <div className="flex items-start">
-                  <div className="text-2xl mr-4">📍</div>
+                  <div className="text-3xl mr-4">📍</div>
                   <div>
-                    <h3 className="font-semibold">Address</h3>
+                    <h3 className="font-semibold text-charcoal">Address</h3>
                     <p className="text-gray-600">Kitengela, Kajiado County<br />Kenya</p>
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <div className="text-2xl mr-4">📞</div>
+                  <div className="text-3xl mr-4">📞</div>
                   <div>
-                    <h3 className="font-semibold">Phone</h3>
-                    <p className="text-gray-600">+254 XXX XXX XXX</p>
+                    <h3 className="font-semibold text-charcoal">Phone</h3>
+                    <p className="text-gray-600">+254 712 345 678</p>
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <div className="text-2xl mr-4">✉️</div>
+                  <div className="text-3xl mr-4">✉️</div>
                   <div>
-                    <h3 className="font-semibold">Email</h3>
+                    <h3 className="font-semibold text-charcoal">Email</h3>
                     <p className="text-gray-600">info@gospelblooms.org</p>
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <div className="text-2xl mr-4">🕐</div>
+                  <div className="text-3xl mr-4">🕐</div>
                   <div>
-                    <h3 className="font-semibold">Office Hours</h3>
+                    <h3 className="font-semibold text-charcoal">Office Hours</h3>
                     <p className="text-gray-600">Monday - Friday<br />9:00 AM - 5:00 PM</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <h2 className="text-2xl font-bold text-purple-600 mb-4">Follow Us</h2>
-              <p className="text-gray-600 mb-4">
-                Stay connected with us on social media for updates and community news.
+            <div className="bg-gradient-to-br from-cream-100 to-cream-50 rounded-xl shadow-lg p-10 border border-cream-500">
+              <h2 className="text-3xl font-bold text-charcoal mb-4">Follow Us</h2>
+              <p className="text-gray-600 mb-6">
+                Follow us on social media for weekly updates, event reminders, and community highlights.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="bg-gold-500 text-white px-6 py-3 rounded-lg hover:bg-gold-600 transition-all">
                   Facebook
                 </a>
-                <a href="#" className="bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="bg-gold-500 text-white px-6 py-3 rounded-lg hover:bg-gold-600 transition-all">
                   Instagram
                 </a>
-                <a href="#" className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+                <a href="https://wa.me/254712345678" target="_blank" rel="noopener noreferrer" className="bg-gold-500 text-white px-6 py-3 rounded-lg hover:bg-gold-600 transition-all">
                   WhatsApp
                 </a>
               </div>
