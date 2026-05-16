@@ -66,7 +66,7 @@ function Login() {
             
             <button
               type="submit"
-              className="w-full bg-gold-500 text-white py-3 rounded-lg font-semibold hover:bg-gold-600 transition-all"
+              className="special-font w-full bg-gold-500 text-white py-3 rounded-lg font-semibold hover:bg-gold-600 transition-all"
             >
               Login
             </button>

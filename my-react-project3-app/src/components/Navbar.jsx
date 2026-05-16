@@ -11,28 +11,28 @@ function Navbar() {
             </Link>
           </div>
           <div className="hidden md:flex items-center space-x-2">
-            <Link to="/" className="text-charcoal hover:text-white hover:bg-gold-500 px-5 py-3 rounded-lg text-sm font-medium transition-all duration-300">
+            <Link to="/" className="special-font text-charcoal hover:text-white hover:bg-gold-500 px-5 py-3 rounded-lg text-sm font-medium transition-all duration-300">
               Home
             </Link>
-            <Link to="/services" className="text-charcoal hover:text-white hover:bg-gold-500 px-5 py-3 rounded-lg text-sm font-medium transition-all duration-300">
+            <Link to="/services" className="special-font text-charcoal hover:text-white hover:bg-gold-500 px-5 py-3 rounded-lg text-sm font-medium transition-all duration-300">
               Services
             </Link>
-            <Link to="/announcements" className="text-charcoal hover:text-white hover:bg-gold-500 px-5 py-3 rounded-lg text-sm font-medium transition-all duration-300">
+            <Link to="/announcements" className="special-font text-charcoal hover:text-white hover:bg-gold-500 px-5 py-3 rounded-lg text-sm font-medium transition-all duration-300">
               Announcements
             </Link>
-            <Link to="/events" className="text-charcoal hover:text-white hover:bg-gold-500 px-5 py-3 rounded-lg text-sm font-medium transition-all duration-300">
+            <Link to="/events" className="special-font text-charcoal hover:text-white hover:bg-gold-500 px-5 py-3 rounded-lg text-sm font-medium transition-all duration-300">
               Events
             </Link>
-            <Link to="/booking" className="text-charcoal hover:text-white hover:bg-gold-500 px-5 py-3 rounded-lg text-sm font-medium transition-all duration-300">
+            <Link to="/booking" className="special-font text-charcoal hover:text-white hover:bg-gold-500 px-5 py-3 rounded-lg text-sm font-medium transition-all duration-300">
               Booking
             </Link>
-            <Link to="/about" className="text-charcoal hover:text-white hover:bg-gold-500 px-5 py-3 rounded-lg text-sm font-medium transition-all duration-300">
+            <Link to="/about" className="special-font text-charcoal hover:text-white hover:bg-gold-500 px-5 py-3 rounded-lg text-sm font-medium transition-all duration-300">
               About
             </Link>
-            <Link to="/contact" className="text-charcoal hover:text-white hover:bg-gold-500 px-5 py-3 rounded-lg text-sm font-medium transition-all duration-300">
+            <Link to="/contact" className="special-font text-charcoal hover:text-white hover:bg-gold-500 px-5 py-3 rounded-lg text-sm font-medium transition-all duration-300">
               Contact
             </Link>
-            <Link to="/admin" className="bg-gold-500 text-white px-6 py-3 rounded-lg text-sm font-semibold hover:bg-gold-600 transition-all duration-300 shadow-lg ml-4">
+            <Link to="/admin" className="special-font bg-gold-500 text-white px-6 py-3 rounded-lg text-sm font-semibold hover:bg-gold-600 transition-all duration-300 shadow-lg ml-4">
               Admin
             </Link>
           </div>

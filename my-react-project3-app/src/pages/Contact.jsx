@@ -167,13 +167,13 @@ function Contact() {
                 Follow us on social media for weekly updates, event reminders, and community highlights.
               </p>
               <div className="flex space-x-4">
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="bg-gold-500 text-white px-6 py-3 rounded-lg hover:bg-gold-600 transition-all">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="special-font bg-gold-500 text-white px-6 py-3 rounded-lg hover:bg-gold-600 transition-all">
                   Facebook
                 </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="bg-gold-500 text-white px-6 py-3 rounded-lg hover:bg-gold-600 transition-all">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="special-font bg-gold-500 text-white px-6 py-3 rounded-lg hover:bg-gold-600 transition-all">
                   Instagram
                 </a>
-                <a href="https://wa.me/254712345678" target="_blank" rel="noopener noreferrer" className="bg-gold-500 text-white px-6 py-3 rounded-lg hover:bg-gold-600 transition-all">
+                <a href="https://wa.me/254712345678" target="_blank" rel="noopener noreferrer" className="special-font bg-gold-500 text-white px-6 py-3 rounded-lg hover:bg-gold-600 transition-all">
                   WhatsApp
                 </a>
               </div>

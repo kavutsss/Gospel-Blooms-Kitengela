@@ -21,7 +21,7 @@ function Services() {
                   href="https://youtube.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block bg-black text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-800 transition-all"
+                  className="special-font inline-block bg-black text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-800 transition-all"
                 >
                   Watch on YouTube
                 </a>
@@ -38,7 +38,7 @@ function Services() {
                   href="https://youtube.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block bg-black text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-800 transition-all"
+                  className="special-font inline-block bg-black text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-800 transition-all"
                 >
                   Watch on YouTube
                 </a>
@@ -55,7 +55,7 @@ function Services() {
                   href="https://meet.google.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block bg-black text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-800 transition-all"
+                  className="special-font inline-block bg-black text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-800 transition-all"
                 >
                   Join Google Meet
                 </a>
@@ -72,7 +72,7 @@ function Services() {
                   href="https://youtube.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block bg-black text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-800 transition-all"
+                  className="special-font inline-block bg-black text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-800 transition-all"
                 >
                   Watch on YouTube
                 </a>

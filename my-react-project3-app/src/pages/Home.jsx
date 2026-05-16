@@ -13,13 +13,13 @@ function Home() {
           <div className="flex justify-center space-x-6">
             <a
               href="/services"
-              className="bg-gold-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-gold-600 transition-all shadow-lg"
+              className="special-font bg-gold-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-gold-600 transition-all shadow-lg"
             >
               View Services
             </a>
             <a
               href="/announcements"
-              className="border-2 border-gold-500 text-charcoal px-8 py-4 rounded-lg font-semibold hover:bg-gold-500 hover:text-white transition-all"
+              className="special-font border-2 border-gold-500 text-charcoal px-8 py-4 rounded-lg font-semibold hover:bg-gold-500 hover:text-white transition-all"
             >
               Latest Updates
             </a>
