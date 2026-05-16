@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore'
 import { db } from '../firebase'
 
@@ -14,6 +14,35 @@ function Booking() {
   })
   const [bookings, setBookings] = useState([])
   const [showForm, setShowForm] = useState(true)
+
+  useEffect(() => {
+    const loadBookings = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'bookings'))
+        const bookingsData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }))
+        setBookings(bookingsData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)))
+      } catch (error) {
+        console.error('Error fetching bookings:', error)
+      }
+    }
+    loadBookings()
+  }, [])
+
+  const fetchBookings = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'bookings'))
+      const bookingsData = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }))
+      setBookings(bookingsData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)))
+    } catch (error) {
+      console.error('Error fetching bookings:', error)
+    }
+  }
 
   const facilities = [
     'Main Hall',
@@ -50,19 +79,6 @@ function Booking() {
     }
   }
 
-  const fetchBookings = async () => {
-    try {
-      const querySnapshot = await getDocs(collection(db, 'bookings'))
-      const bookingsData = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }))
-      setBookings(bookingsData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)))
-    } catch (error) {
-      console.error('Error fetching bookings:', error)
-    }
-  }
-
   const handleStatusUpdate = async (bookingId, newStatus) => {
     try {
       await updateDoc(doc(db, 'bookings', bookingId), { status: newStatus })
@@ -91,9 +107,9 @@ function Booking() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white py-12">
+    <div className="min-h-screen bg-gradient-to-br from-cream-50 to-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold text-center mb-12 text-gray-800">
+        <h1 className="text-5xl font-bold text-center mb-16 text-gold-500">
           Facility Booking
         </h1>
 
@@ -101,7 +117,7 @@ function Booking() {
           <div className="text-center mb-8">
             <button
               onClick={() => setShowForm(true)}
-              className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition"
+              className="bg-gold-500 text-white px-8 py-3 rounded-lg hover:bg-gold-600 transition-all"
             >
               Submit New Booking Request
             </button>
@@ -109,10 +125,10 @@ function Booking() {
         )}
 
         {showForm && (
-          <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-            <h2 className="text-2xl font-bold text-purple-600 mb-6">Booking Request Form</h2>
+          <div className="bg-gradient-to-br from-cream-200 to-cream-100 rounded-xl shadow-lg p-10 mb-10 border border-cream-500">
+            <h2 className="text-3xl font-bold text-charcoal mb-6">Booking Request Form</h2>
             <form onSubmit={handleSubmit}>
-              <div className="grid md:grid-cols-2 gap-4 mb-4">
+              <div className="grid md:grid-cols-2 gap-6 mb-4">
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2" htmlFor="name">
                     Full Name *
@@ -124,7 +140,7 @@ function Booking() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                     placeholder="Your full name"
                   />
                 </div>
@@ -139,7 +155,7 @@ function Booking() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                     placeholder="your.email@example.com"
                   />
                 </div>
@@ -155,8 +171,8 @@ function Booking() {
                   value={formData.phone}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
-                  placeholder="+254 XXX XXX XXX"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                  placeholder="+254 712 345 678"
                 />
               </div>
               <div className="mb-4">
@@ -169,7 +185,7 @@ function Booking() {
                   value={formData.facility}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                 >
                   <option value="">Select a facility</option>
                   {facilities.map((facility) => (
@@ -179,7 +195,7 @@ function Booking() {
                   ))}
                 </select>
               </div>
-              <div className="grid md:grid-cols-2 gap-4 mb-4">
+              <div className="grid md:grid-cols-2 gap-6 mb-4">
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2" htmlFor="date">
                     Date *
@@ -191,7 +207,7 @@ function Booking() {
                     value={formData.date}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                   />
                 </div>
                 <div>
@@ -205,7 +221,7 @@ function Booking() {
                     value={formData.time}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                   />
                 </div>
               </div>
@@ -220,21 +236,21 @@ function Booking() {
                   onChange={handleChange}
                   required
                   rows="4"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                   placeholder="Describe the purpose of your booking..."
                 ></textarea>
               </div>
               <div className="flex space-x-4">
                 <button
                   type="submit"
-                  className="flex-1 bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition"
+                  className="flex-1 bg-gold-500 text-white py-3 rounded-lg font-semibold hover:bg-gold-600 transition-all"
                 >
                   Submit Request
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowForm(false)}
-                  className="flex-1 bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-400 transition"
+                  className="flex-1 bg-white text-charcoal py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all border border-cream-500"
                 >
                   Cancel
                 </button>
@@ -243,17 +259,17 @@ function Booking() {
           </div>
         )}
 
-        <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-            <h2 className="text-2xl font-bold text-purple-600 mb-6">All Booking Requests</h2>
+        <div className="bg-white rounded-xl shadow-lg p-10 mb-10 border border-cream-500">
+            <h2 className="text-3xl font-bold text-charcoal mb-6">All Booking Requests</h2>
             {bookings.length === 0 ? (
               <p className="text-gray-600">No booking requests yet.</p>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {bookings.map((booking) => (
-                  <div key={booking.id} className="border rounded-lg p-6">
+                  <div key={booking.id} className="border border-cream-500 rounded-xl p-6">
                     <div className="flex justify-between items-start mb-4">
                       <div>
-                        <h3 className="text-xl font-semibold">{booking.name}</h3>
+                        <h3 className="text-xl font-semibold text-charcoal">{booking.name}</h3>
                         <p className="text-gray-600">{booking.email} | {booking.phone}</p>
                       </div>
                       <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(booking.status)}`}>
@@ -270,13 +286,13 @@ function Booking() {
                       <div className="flex space-x-2">
                         <button
                           onClick={() => handleStatusUpdate(booking.id, 'Approved')}
-                          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+                          className="bg-gold-500 text-white px-4 py-2 rounded hover:bg-gold-600 transition-all"
                         >
                           Approve
                         </button>
                         <button
                           onClick={() => handleStatusUpdate(booking.id, 'Rejected')}
-                          className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+                          className="bg-gold-500 text-white px-4 py-2 rounded hover:bg-gold-600 transition-all"
                         >
                           Reject
                         </button>
@@ -289,14 +305,14 @@ function Booking() {
           </div>
 
         {bookings.length > 0 && (
-          <div className="bg-white rounded-lg shadow-md p-8">
-            <h2 className="text-2xl font-bold text-purple-600 mb-6">Your Booking Requests</h2>
-            <div className="space-y-4">
+          <div className="bg-gradient-to-br from-cream-100 to-cream-50 rounded-xl shadow-lg p-10 border border-cream-500">
+            <h2 className="text-3xl font-bold text-charcoal mb-6">Your Booking Requests</h2>
+            <div className="space-y-6">
               {bookings.map((booking) => (
-                <div key={booking.id} className="border rounded-lg p-6">
+                <div key={booking.id} className="border border-cream-500 rounded-xl p-6">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h3 className="text-xl font-semibold">{booking.facility}</h3>
+                      <h3 className="text-xl font-semibold text-charcoal">{booking.facility}</h3>
                       <p className="text-gray-600">
                         {new Date(booking.date).toLocaleDateString()} at {booking.time}
                       </p>

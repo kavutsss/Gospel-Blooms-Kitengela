@@ -13,7 +13,7 @@ function Announcements() {
   })
 
   useEffect(() => {
-    const fetchAnnouncements = async () => {
+    const loadAnnouncements = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, 'announcements'))
         const announcementsData = querySnapshot.docs.map(doc => ({
@@ -26,7 +26,7 @@ function Announcements() {
         console.error('Error fetching announcements:', error)
       }
     }
-    fetchAnnouncements()
+    loadAnnouncements()
   }, [])
 
   const fetchAnnouncements = async () => {
@@ -82,25 +82,25 @@ function Announcements() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white py-12">
+    <div className="min-h-screen bg-gradient-to-br from-cream-50 to-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-800">Announcements</h1>
+          <h1 className="text-5xl font-bold text-gold-500">Announcements</h1>
           <button
             onClick={() => {
               setShowForm(!showForm)
               setEditingId(null)
               setFormData({ title: '', content: '', date: new Date().toISOString().split('T')[0] })
             }}
-            className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition"
+            className="bg-gold-500 text-white px-8 py-3 rounded-lg hover:bg-gold-600 transition-all"
           >
             {showForm ? 'Cancel' : 'Add Announcement'}
           </button>
         </div>
 
         {showForm && (
-          <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-            <h2 className="text-2xl font-bold text-purple-600 mb-6">
+          <div className="bg-gradient-to-br from-cream-200 to-cream-100 rounded-xl shadow-lg p-10 mb-10 border border-cream-500">
+            <h2 className="text-3xl font-bold text-charcoal mb-6">
               {editingId ? 'Edit Announcement' : 'New Announcement'}
             </h2>
             <form onSubmit={handleSubmit}>
@@ -114,7 +114,7 @@ function Announcements() {
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                   placeholder="Announcement title"
                 />
               </div>
@@ -128,7 +128,7 @@ function Announcements() {
                   value={formData.date}
                   onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                 />
               </div>
               <div className="mb-6">
@@ -141,13 +141,13 @@ function Announcements() {
                   onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                   required
                   rows="5"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                   placeholder="Announcement content..."
                 ></textarea>
               </div>
               <button
                 type="submit"
-                className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition"
+                className="bg-gold-500 text-white px-8 py-3 rounded-lg hover:bg-gold-600 transition-all"
               >
                 {editingId ? 'Update' : 'Publish'}
               </button>
@@ -155,17 +155,17 @@ function Announcements() {
           </div>
         )}
 
-        <div className="space-y-6">
+        <div className="space-y-8">
           {announcements.length === 0 ? (
-            <div className="bg-white rounded-lg shadow-md p-8 text-center text-gray-600">
+            <div className="bg-white rounded-xl shadow-lg p-10 text-center text-gray-600 border border-cream-500">
               No announcements yet. Check back soon!
             </div>
           ) : (
             announcements.map((announcement) => (
-              <div key={announcement.id} className="bg-white rounded-lg shadow-md p-8">
-                <div className="flex justify-between items-start mb-4">
+              <div key={announcement.id} className="bg-white rounded-xl shadow-lg p-10 border border-cream-500">
+                <div className="flex justify-between items-start mb-6">
                   <div>
-                    <h2 className="text-2xl font-bold text-purple-600 mb-2">{announcement.title}</h2>
+                    <h2 className="text-2xl font-bold text-charcoal mb-2">{announcement.title}</h2>
                     <p className="text-gray-500 text-sm">
                       {new Date(announcement.date).toLocaleDateString('en-US', {
                         weekday: 'long',
@@ -178,19 +178,19 @@ function Announcements() {
                   <div className="space-x-2">
                     <button
                       onClick={() => handleEdit(announcement)}
-                      className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 transition text-sm"
+                      className="bg-gold-500 text-white px-4 py-2 rounded hover:bg-gold-600 transition-all text-sm"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(announcement.id)}
-                      className="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 transition text-sm"
+                      className="bg-gold-500 text-white px-4 py-2 rounded hover:bg-gold-600 transition-all text-sm"
                     >
                       Delete
                     </button>
                   </div>
                 </div>
-                <p className="text-gray-700 whitespace-pre-line">{announcement.content}</p>
+                <p className="text-gray-700 whitespace-pre-line leading-relaxed">{announcement.content}</p>
               </div>
             ))
           )}

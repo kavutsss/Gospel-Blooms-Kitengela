@@ -15,7 +15,7 @@ function Events() {
   })
 
   useEffect(() => {
-    const fetchEvents = async () => {
+    const loadEvents = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, 'events'))
         const eventsData = querySnapshot.docs.map(doc => ({
@@ -28,7 +28,7 @@ function Events() {
         console.error('Error fetching events:', error)
       }
     }
-    fetchEvents()
+    loadEvents()
   }, [])
 
   const fetchEvents = async () => {
@@ -90,29 +90,29 @@ function Events() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white py-12">
+    <div className="min-h-screen bg-gradient-to-br from-cream-50 to-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-800">Events</h1>
+          <h1 className="text-5xl font-bold text-gold-500">Events</h1>
           <button
             onClick={() => {
               setShowForm(!showForm)
               setEditingId(null)
               setFormData({ title: '', date: '', time: '', venue: '', description: '' })
             }}
-            className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition"
+            className="bg-gold-500 text-white px-8 py-3 rounded-lg hover:bg-gold-600 transition-all"
           >
             {showForm ? 'Cancel' : 'Add Event'}
           </button>
         </div>
 
         {showForm && (
-          <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-            <h2 className="text-2xl font-bold text-purple-600 mb-6">
+          <div className="bg-gradient-to-br from-cream-200 to-cream-100 rounded-xl shadow-lg p-10 mb-10 border border-cream-500">
+            <h2 className="text-3xl font-bold text-charcoal mb-6">
               {editingId ? 'Edit Event' : 'New Event'}
             </h2>
             <form onSubmit={handleSubmit}>
-              <div className="grid md:grid-cols-2 gap-4 mb-4">
+              <div className="grid md:grid-cols-2 gap-6 mb-4">
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2" htmlFor="title">
                     Title *
@@ -120,10 +120,11 @@ function Events() {
                   <input
                     type="text"
                     id="title"
+                    name="title"
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                     placeholder="Event title"
                   />
                 </div>
@@ -134,14 +135,15 @@ function Events() {
                   <input
                     type="date"
                     id="date"
+                    name="date"
                     value={formData.date}
                     onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                   />
                 </div>
               </div>
-              <div className="grid md:grid-cols-2 gap-4 mb-4">
+              <div className="grid md:grid-cols-2 gap-6 mb-4">
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2" htmlFor="time">
                     Time *
@@ -149,10 +151,11 @@ function Events() {
                   <input
                     type="time"
                     id="time"
+                    name="time"
                     value={formData.time}
                     onChange={(e) => setFormData({ ...formData, time: e.target.value })}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                   />
                 </div>
                 <div>
@@ -162,10 +165,11 @@ function Events() {
                   <input
                     type="text"
                     id="venue"
+                    name="venue"
                     value={formData.venue}
                     onChange={(e) => setFormData({ ...formData, venue: e.target.value })}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                     placeholder="Event venue"
                   />
                 </div>
@@ -180,13 +184,13 @@ function Events() {
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   required
                   rows="4"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                   placeholder="Event description..."
                 ></textarea>
               </div>
               <button
                 type="submit"
-                className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition"
+                className="bg-gold-500 text-white px-8 py-3 rounded-lg hover:bg-gold-600 transition-all"
               >
                 {editingId ? 'Update' : 'Create Event'}
               </button>
@@ -194,22 +198,22 @@ function Events() {
           </div>
         )}
 
-        <div className="space-y-6">
+        <div className="space-y-8">
           {events.length === 0 ? (
-            <div className="bg-white rounded-lg shadow-md p-8 text-center text-gray-600">
+            <div className="bg-white rounded-xl shadow-lg p-10 text-center text-gray-600 border border-cream-500">
               No events scheduled yet. Check back soon!
             </div>
           ) : (
             <>
-              <h2 className="text-2xl font-bold text-purple-600 mb-4">Upcoming Events</h2>
+              <h2 className="text-3xl font-bold text-charcoal mb-6">Upcoming Events</h2>
               {events.filter(event => isUpcoming(event.date)).length === 0 && (
                 <p className="text-gray-600 mb-6">No upcoming events at the moment.</p>
               )}
               {events.filter(event => isUpcoming(event.date)).map((event) => (
-                <div key={event.id} className="bg-white rounded-lg shadow-md p-8 mb-6">
-                  <div className="flex justify-between items-start mb-4">
+                <div key={event.id} className="bg-gradient-to-br from-cream-200 to-cream-100 rounded-xl shadow-lg p-10 mb-8 border border-cream-500">
+                  <div className="flex justify-between items-start mb-6">
                     <div className="flex-1">
-                      <h2 className="text-2xl font-bold text-purple-600 mb-2">{event.title}</h2>
+                      <h2 className="text-2xl font-bold text-charcoal mb-2">{event.title}</h2>
                       <div className="space-y-1 text-gray-600">
                         <p>📅 {new Date(event.date).toLocaleDateString('en-US', {
                           weekday: 'long',
@@ -224,26 +228,26 @@ function Events() {
                     <div className="space-x-2 ml-4">
                       <button
                         onClick={() => handleEdit(event)}
-                        className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 transition text-sm"
+                        className="bg-gold-500 text-white px-4 py-2 rounded hover:bg-gold-600 transition-all text-sm"
                       >
                         Edit
                       </button>
                       <button
                         onClick={() => handleDelete(event.id)}
-                        className="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 transition text-sm"
+                        className="bg-gold-500 text-white px-4 py-2 rounded hover:bg-gold-600 transition-all text-sm"
                       >
                         Delete
                       </button>
                     </div>
                   </div>
-                  <p className="text-gray-700 whitespace-pre-line">{event.description}</p>
+                  <p className="text-gray-700 whitespace-pre-line leading-relaxed">{event.description}</p>
                 </div>
               ))}
 
-              <h2 className="text-2xl font-bold text-gray-600 mb-4 mt-12">Past Events</h2>
+              <h2 className="text-3xl font-bold text-gray-600 mb-6 mt-12">Past Events</h2>
               {events.filter(event => !isUpcoming(event.date)).map((event) => (
-                <div key={event.id} className="bg-gray-100 rounded-lg shadow-md p-8 mb-6 opacity-75">
-                  <div className="flex justify-between items-start mb-4">
+                <div key={event.id} className="bg-white rounded-xl shadow-lg p-10 mb-8 opacity-75 border border-cream-500">
+                  <div className="flex justify-between items-start mb-6">
                     <div className="flex-1">
                       <h2 className="text-2xl font-bold text-gray-600 mb-2">{event.title}</h2>
                       <div className="space-y-1 text-gray-600">
@@ -260,19 +264,19 @@ function Events() {
                     <div className="space-x-2 ml-4">
                       <button
                         onClick={() => handleEdit(event)}
-                        className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 transition text-sm"
+                        className="bg-gold-500 text-white px-4 py-2 rounded hover:bg-gold-600 transition-all text-sm"
                       >
                         Edit
                       </button>
                       <button
                         onClick={() => handleDelete(event.id)}
-                        className="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 transition text-sm"
+                        className="bg-gold-500 text-white px-4 py-2 rounded hover:bg-gold-600 transition-all text-sm"
                       >
                         Delete
                       </button>
                     </div>
                   </div>
-                  <p className="text-gray-700 whitespace-pre-line">{event.description}</p>
+                  <p className="text-gray-700 whitespace-pre-line leading-relaxed">{event.description}</p>
                 </div>
               ))}
             </>
