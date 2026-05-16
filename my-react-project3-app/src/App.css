@@ -1,18 +1,20 @@
+@import "tailwindcss";
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;
   border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
+  color: var(--black);
+  background: var(--beige-light);
+  border: 2px solid var(--beige-dark);
   transition: border-color 0.3s;
   margin-bottom: 24px;
 
   &:hover {
-    border-color: var(--accent-border);
+    border-color: var(--black);
   }
   &:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--black);
     outline-offset: 2px;
   }
 }
@@ -72,7 +74,7 @@
 
 #next-steps {
   display: flex;
-  border-top: 1px solid var(--border);
+  border-top: 2px solid var(--beige-dark);
   text-align: left;
 
   & > div {
@@ -96,11 +98,11 @@
 }
 
 #docs {
-  border-right: 1px solid var(--border);
+  border-right: 2px solid var(--beige-dark);
 
   @media (max-width: 1024px) {
     border-right: none;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 2px solid var(--beige-dark);
   }
 }
 
@@ -155,7 +157,7 @@
 
 #spacer {
   height: 88px;
-  border-top: 1px solid var(--border);
+  border-top: 2px solid var(--beige-dark);
   @media (max-width: 1024px) {
     height: 48px;
   }
